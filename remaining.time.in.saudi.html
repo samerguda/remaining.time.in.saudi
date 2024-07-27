@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table with Copy and Print Buttons</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 8px 12px;
+        }
+        th {
+            background-color: #ffff00;
+        }
+        td {
+            background-color: #e0e0e0;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<table id="scheduleTable">
+    <thead>
+        <tr>
+            <th>الشهور المتبقية</th>
+            <th>From</th>
+            <th>To</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>17/08/2024</td>
+            <td>17/09/2024</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>17/09/2024</td>
+            <td>17/10/2024</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>17/10/2024</td>
+            <td>17/11/2024</td>
+        </tr>
+    </tbody>
+</table>
+
+<button onclick="copyTable()">Copy Table</button>
+<button onclick="printTable()">Print Table</button>
+
+<script>
+    function copyTable() {
+        const range = document.createRange();
+        range.selectNode(document.getElementById("scheduleTable"));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();// to deselect
+        alert("Table copied to clipboard");
+    }
+
+    function printTable() {
+        const table = document.getElementById("scheduleTable").outerHTML;
+        const newWin = window.open("");
+        newWin.document.write(table);
+        newWin.print();
+        newWin.close();
+    }
+</script>
+
+</body>
+</html>
